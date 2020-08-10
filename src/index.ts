@@ -1,6 +1,6 @@
 import * as redis from 'redis';
-import * as redisClient from './redis';
 import * as memoryClient from './memory';
+import * as redisClient from './redis';
 
 interface IOptions {
   redisOptions?: {
