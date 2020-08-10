@@ -5,7 +5,7 @@ import * as redisClient from './redis';
 interface IOptions {
   redisOptions?: {
     host?: string;
-    port?: string;
+    port?: number;
     password?: string;
     timeout?: number;
     enableOfflineQueue?: boolean;
@@ -24,17 +24,15 @@ export const init = (options?: IOptions) => {
 
     const retryStrategy = (retryOptions) => Math.max(retryOptions.attempt * 100, 3000);
 
-    const options = {
+    redisClient.init(redis.createClient({
       host: redisOptions.host,
       port: redisOptions.port,
       password: redisOptions.password,
       connect_timeout: redisOptions.timeout || 15000,
       enable_offline_queue: redisOptions.enableOfflineQueue || true,
-      retryUnfulfilledCommands: redisOptions.enableOfflineQueue || true,
+      retry_unfulfilled_commands: redisOptions.retryUnfulfilledCommands || true,
       retry_strategy: redisOptions.retryStrategy || retryStrategy
-    };
-
-    redisClient.init(redis.createClient(options));
+    }));
   } else {
     client = memoryClient;
   }
