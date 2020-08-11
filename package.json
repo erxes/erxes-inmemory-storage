@@ -10,6 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/erxes/erxes-inmemory-storage.git"
   },
+  "files": [
+    "src"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
