@@ -12,23 +12,50 @@ interface IOptions {
   retryStrategy?: (options: any) => number;
 };
 
+interface IDefaultOptions {
+  host?: string;
+  port?: number;
+  password?: string;
+  connect_timeout?: number;
+  enable_offline_queue?: boolean;
+  retry_unfulfilled_commands?: boolean;
+  retry_strategy?: any;
+};
+
+export const redisOptions: IDefaultOptions  = {
+  connect_timeout: 15000,
+  enable_offline_queue: true,
+  retry_unfulfilled_commands: true,
+  retry_strategy: options => Math.max(options.attempt * 100, 3000)
+};
+
 export let client;
 
 export const init = (options: IOptions) => {
   if (options.host) {
     client = redisClient;
 
-    const retryStrategy = retryOptions => Math.max(retryOptions.attempt * 100, 3000);
+    redisOptions.host = options.host;
+    redisOptions.port = options.port;
+    redisOptions.password = options.password;
 
-    redisClient.init(redis.createClient({
-      host: options.host,
-      port: options.port,
-      password: options.password,
-      connect_timeout: options.timeout || 15000,
-      enable_offline_queue: options.enableOfflineQueue || true,
-      retry_unfulfilled_commands: options.retryUnfulfilledCommands || true,
-      retry_strategy: options.retryStrategy || retryStrategy
-    }));
+    if (options.timeout) {
+      redisOptions.connect_timeout = options.timeout;
+    }
+
+    if (options.enableOfflineQueue) {
+      redisOptions.enable_offline_queue = options.enableOfflineQueue;
+    }
+
+    if (options.retryUnfulfilledCommands) {
+      redisOptions.retry_unfulfilled_commands = options.retryUnfulfilledCommands;
+    }
+
+    if (options.retryStrategy) {
+      redisOptions.retry_strategy = options.retryStrategy;
+    }
+
+    redisClient.init(redis.createClient(redisOptions));
   } else {
     client = memoryClient;
   }
