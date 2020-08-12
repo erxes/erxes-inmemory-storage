@@ -26,6 +26,9 @@ export const set = (key: string, value: any) => {
   client.set(key, value);
 };
 
+/*
+ * Get array of values by given key
+ */
 export const getArray = async (key: string, defaultValue = []): Promise<any> => {
   try {
     const response = await new Promise((resolve, reject) => {
