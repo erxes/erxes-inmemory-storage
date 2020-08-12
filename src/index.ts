@@ -29,11 +29,11 @@ export const redisOptions: IDefaultOptions  = {
   retry_strategy: options => Math.max(options.attempt * 100, 3000)
 };
 
-export let memoryStorage;
+export let client;
 
 export const init = (options: IOptions) => {
   if (options.host) {
-    memoryStorage = redisClient;
+    client = redisClient;
 
     redisOptions.host = options.host;
     redisOptions.port = options.port;
@@ -57,6 +57,6 @@ export const init = (options: IOptions) => {
 
     redisClient.init(redis.createClient(redisOptions));
   } else {
-    memoryStorage = memoryClient;
+    client = memoryClient;
   }
 };
