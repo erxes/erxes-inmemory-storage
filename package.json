@@ -1,7 +1,7 @@
 {
   "name": "erxes-inmemory-storage",
   "version": "1.0.8",
-  "description": "",
+  "description": "Memory storage for the Erxes",
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,7 +15,7 @@
     "src",
     "lib"
   ],
-  "author": "",
+  "author": "Munkh-Orgil Myagmarsuren",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/erxes/erxes-inmemory-storage/issues"
