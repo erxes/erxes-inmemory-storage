@@ -52,3 +52,13 @@ export const removeFromArray = (setKey: string, setMember: string) => {
     value.filter(m => m !== setMember);
   }
 };
+
+export const getArray = async (key: string, defaultValue = []): Promise<any> => {
+  const value = storage[key];
+
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  return defaultValue;
+};
