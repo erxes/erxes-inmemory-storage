@@ -29,5 +29,6 @@ jobs:
     - name: TSLint checks
       uses: mooyoul/tslint-actions@v1.1.1
       with:
-        token: ab870fb392718ec90bfcd0310ab5d0fcdef88cd1
+        token: ${{ secrets.GITHUB_TOKEN }}
         project: erxes/erxes-inmemory-storage
+        pattern: '*.ts'
