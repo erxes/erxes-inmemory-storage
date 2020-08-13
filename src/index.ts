@@ -10,7 +10,6 @@ interface IOptions {
   enableOfflineQueue?: boolean;
   retryUnfulfilledCommands?: boolean;
   retryStrategy?: (options: any) => number;
-  totalRetryTime?: number;
 };
 
 interface IDefaultOptions {
@@ -21,7 +20,6 @@ interface IDefaultOptions {
   enable_offline_queue?: boolean;
   retry_unfulfilled_commands?: boolean;
   retry_strategy?: any;
-  total_retry_time?: number;
 };
 
 export const redisOptions: IDefaultOptions  = {
@@ -29,7 +27,6 @@ export const redisOptions: IDefaultOptions  = {
   enable_offline_queue: true,
   retry_unfulfilled_commands: true,
   retry_strategy: options => Math.max(options.attempt * 100, 3000),
-  total_retry_time: 15000,
 };
 
 export let client;
@@ -56,10 +53,6 @@ export const init = (options: IOptions) => {
 
     if (options.retryStrategy) {
       redisOptions.retry_strategy = options.retryStrategy;
-    }
-
-    if (options.totalRetryTime) {
-      redisOptions.total_retry_time = options.totalRetryTime;
     }
 
     redisClient.init(redis.createClient(redisOptions));
