@@ -103,3 +103,17 @@ export const removeFromArray = (setKey: string, setMember: string) => {
     });
   });
 };
+
+export const removeKey = async (key: string) => {
+  return new Promise((resolve, reject) => {
+    client.del(key, (error, response) => {
+      if (error) {
+        return reject(error);
+      }
+
+      if (response === 1) {
+        return resolve('success');
+      }
+    });
+  });
+};

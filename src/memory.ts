@@ -62,3 +62,11 @@ export const getArray = async (key: string, defaultValue = []): Promise<any> => 
 
   return defaultValue;
 };
+
+export const removeKey = async (key: string) => {
+  const selectedKey = storage[key];
+
+  if (selectedKey) {
+    delete storage[key];
+  }
+};
