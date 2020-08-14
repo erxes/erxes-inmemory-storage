@@ -31,7 +31,7 @@ export const redisOptions: IDefaultOptions  = {
 
 export let client;
 
-export const init = (options: IOptions) => {
+export const init = (options: IOptions = {}) => {
   if (options.host) {
     client = redisClient;
 
