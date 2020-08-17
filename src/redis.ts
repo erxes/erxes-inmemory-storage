@@ -117,3 +117,10 @@ export const removeKey = async (key: string) => {
     });
   });
 };
+
+/*
+ * Set array
+ */
+export const setArray = (key: string, value: any[]) => {
+  client.set(key, JSON.stringify(value));
+};

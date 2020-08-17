@@ -70,3 +70,10 @@ export const removeKey = async (key: string) => {
     delete storage[key];
   }
 };
+
+/*
+ * Set array
+ */
+export const setArray = (key: string, value: any[]) => {
+  storage[key] = JSON.stringify(value);
+};
