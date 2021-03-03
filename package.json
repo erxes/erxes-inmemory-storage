@@ -1,6 +1,6 @@
 {
   "name": "erxes-inmemory-storage",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "Memory storage for the Erxes",
   "main": "lib/index.js",
   "scripts": {
