@@ -22,14 +22,17 @@ export const get = (key: string, defaultValue?: any): Promise<any> => {
 /*
  * Set item
  */
-export const set = (key: string, value: any) => {
-  client.set(key, value);
+export const set = (...args) => {
+  client.set(...args);
 };
 
 /*
  * Get array of values by given key
  */
-export const getArray = async (key: string, defaultValue = []): Promise<any> => {
+export const getArray = async (
+  key: string,
+  defaultValue = []
+): Promise<any> => {
   try {
     const response = await new Promise((resolve, reject) => {
       client.smembers(key, (error, reply) => {
@@ -50,7 +53,10 @@ export const getArray = async (key: string, defaultValue = []): Promise<any> => 
 /*
  * Check if value exists in set
  */
-export const inArray = async (setKey: string, setMember: string): Promise<any> => {
+export const inArray = async (
+  setKey: string,
+  setMember: string
+): Promise<any> => {
   try {
     const response = await new Promise((resolve, reject) => {
       client.sismember(setKey, setMember, (error, reply) => {
